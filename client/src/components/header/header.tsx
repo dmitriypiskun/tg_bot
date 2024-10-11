@@ -1,10 +1,13 @@
-import { PropsWithChildren } from "react";
 import styles from "./header.module.css";
 
-export interface HeaderProps {}
+export interface HeaderProps {
+  title: string;
+}
 
-export const Header: React.FC<PropsWithChildren<HeaderProps>> = ({
-  children,
-}) => {
-  return <div className={styles["conteiner"]}>{children}</div>;
+export const Header: React.FC<HeaderProps> = ({ title }) => {
+  return (
+    <div className={styles["conteiner"]}>
+      <span className={styles["content__title"]}>{title}</span>
+    </div>
+  );
 };

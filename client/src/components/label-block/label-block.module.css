@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 8px;
+  gap: 8px;
+}
+
+.container__label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.container__text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}

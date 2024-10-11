@@ -17,14 +17,16 @@ export function UserDetail() {
 
   if (!user) {
     return (
-      <LoginButton
-        botUsername={"whols_here_bot"}
-        buttonSize="large"
-        cornerRadius={20}
-        showAvatar={false}
-        lang="en"
-        onAuthCallback={handleLogin}
-      />
+      <div className={styles["container"]}>
+        <LoginButton
+          botUsername={"whols_here_bot"}
+          buttonSize="large"
+          cornerRadius={20}
+          showAvatar={false}
+          lang="en"
+          onAuthCallback={handleLogin}
+        />
+      </div>
     );
   }
 
@@ -32,9 +34,10 @@ export function UserDetail() {
     <div className={styles["container"]}>
       <Header title="User detail" />
 
-      <main>
-        <img src="" alt=""></img>
-        <div>{JSON.stringify(user)}</div>
+      <main className={styles["container__content"]}>
+        <img className={styles["image"]} src="" alt="Avatar"></img>
+
+        <div className={styles["row"]}>{JSON.stringify(user)}</div>
       </main>
     </div>
   );

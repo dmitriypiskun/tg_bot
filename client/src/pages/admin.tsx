@@ -8,6 +8,8 @@ export const Admin: React.FC<AdminProps> = () => {
   return (
     <div className={styles["container"]}>
       <Header title="Admin" />
+
+      <div className={styles["container__content"]}></div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import "./App.css";
+import styles from "./app.module.css";
+import { Button, Header } from "./components";
 
 const tg = window.Telegram.WebApp;
 
@@ -13,9 +14,11 @@ function App() {
   };
 
   return (
-    <div className="">
-      Content
-      <button onClick={handleClose}>Close</button>
+    <div className={styles["container"]}>
+      <Header>
+        <span>{tg.initDataUnsafe?.user?.username}</span>
+        <Button title="Close" onClick={handleClose} />
+      </Header>
     </div>
   );
 }

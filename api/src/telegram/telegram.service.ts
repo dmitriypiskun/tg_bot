@@ -21,7 +21,6 @@ export class TelegramService implements OnModuleInit {
   }
 
   async botMessage() {
-    let isSharePhone = false;
     let user = null;
 
     const bot = new TelegramBot(this.config.get('TELEGRAM_BOT_TOKEN'), {
@@ -30,9 +29,8 @@ export class TelegramService implements OnModuleInit {
 
     bot.on('message', async (msg) => {
       const chatId = msg.chat.id;
-      const text = msg.text;
 
-      if (text === '/start') {
+      if (msg.text === '/start') {
         const photoURL = await this.getUserPhotoUrl(msg.from.id, bot);
 
         user = await this.createUserUsecase.execute({
@@ -46,7 +44,7 @@ export class TelegramService implements OnModuleInit {
 
         await this.sendStartButton(chatId, bot);
 
-        if (!isSharePhone) {
+        if (!user.phone) {
           await bot.sendMessage(
             chatId,
             'Пожалуйста, поделитесь вашим номером телефона',
@@ -75,7 +73,6 @@ export class TelegramService implements OnModuleInit {
       });
 
       await this.sendStartButton(msg.chat.id, bot);
-      isSharePhone = true;
     });
   }
 

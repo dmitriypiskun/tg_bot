@@ -1,12 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./user-detail.module.css";
 import { Header, LabelBlock } from "../components";
 import { LoginButton, TelegramAuthData } from "@telegram-auth/react";
 import { User, useUserData } from "../useUser";
+import { useTelegram } from "../useTelegram";
 
 export function UserDetail() {
   const [userData, setUserData] = useState<User>();
+  const { user } = useTelegram();
   const { createUser } = useUserData();
+
+  useEffect(() => {
+    if (user) {
+      createUser({
+        tgId: user.id.toString(),
+        firstName: user.first_name,
+        lastName: user.last_name,
+        userName: user.username,
+        photo: user.photo_url,
+      }).then((result) => {
+        if (result) {
+          setUserData(result);
+        }
+      });
+    }
+  }, [user]);
 
   const handleLogin = async (data: TelegramAuthData) => {
     const result = await createUser({
@@ -22,7 +40,7 @@ export function UserDetail() {
     }
   };
 
-  if (!userData) {
+  if (!userData && !user) {
     return (
       <div className={styles["container"]}>
         <LoginButton
@@ -44,17 +62,17 @@ export function UserDetail() {
       <main className={styles["container__content"]}>
         <img
           className={styles["image"]}
-          src={userData.photo || ""}
+          src={userData?.photo || ""}
           alt="Avatar"
         />
 
         <div className={styles["column"]}>
-          <LabelBlock label="Telegram ID" text={userData.tgId} />
-          <LabelBlock label="First name" text={userData.firstName} />
-          <LabelBlock label="Last name" text={userData.lastName || " - "} />
-          <LabelBlock label="User name" text={userData.userName || " - "} />
-          <LabelBlock label="Phone" text={userData.phone || " - "} />
-          <LabelBlock label="Language" text={userData.language || " - "} />
+          <LabelBlock label="Telegram ID" text={userData?.tgId} />
+          <LabelBlock label="First name" text={userData?.firstName} />
+          <LabelBlock label="Last name" text={userData?.lastName || " - "} />
+          <LabelBlock label="User name" text={userData?.userName || " - "} />
+          <LabelBlock label="Phone" text={userData?.phone || " - "} />
+          <LabelBlock label="Language" text={userData?.language || " - "} />
         </div>
       </main>
     </div>

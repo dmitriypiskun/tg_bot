@@ -8,6 +8,7 @@ import "rc-pagination/assets/index.css";
 import locale from "rc-pagination/lib/locale/en_US";
 import { useDebounce } from "use-debounce";
 import { LoginButton, TelegramAuthData } from "@telegram-auth/react";
+import { useTelegram } from "../useTelegram";
 
 export interface AdminProps {}
 
@@ -19,6 +20,7 @@ export const Admin: React.FC<AdminProps> = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isLogin, setIsLogin] = useState(false);
   const { getUserList, getUser } = useUserData();
+  const { user } = useTelegram();
 
   const currentPage = useMemo(() => Math.ceil(offset / limit), [offset, limit]);
 
@@ -42,7 +44,7 @@ export const Admin: React.FC<AdminProps> = () => {
     setIsLogin(!!result);
   };
 
-  if (!isLogin) {
+  if (!isLogin && !user) {
     return (
       <div className={styles["container"]}>
         <LoginButton

@@ -1,21 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./user-detail.module.css";
 import { Header, LabelBlock } from "../components";
-import { useTelegram } from "../useTelegram";
 import { LoginButton, TelegramAuthData } from "@telegram-auth/react";
 import { User, useUserData } from "../useUser";
 
 export function UserDetail() {
   const [userData, setUserData] = useState<User>();
-  const { tg, user } = useTelegram();
   const { createUser } = useUserData();
 
-  useEffect(() => {
-    tg.ready();
-  }, []);
-
-  const handleLogin = useCallback(async (data: TelegramAuthData) => {
-    const user = await createUser({
+  const handleLogin = async (data: TelegramAuthData) => {
+    const result = await createUser({
       tgId: data.id.toString(),
       firstName: data.first_name,
       lastName: data.last_name,
@@ -23,12 +17,12 @@ export function UserDetail() {
       photo: data.photo_url,
     });
 
-    if (user) {
-      setUserData(user);
+    if (result) {
+      setUserData(result);
     }
-  }, []);
+  };
 
-  if (!user || !userData) {
+  if (!userData) {
     return (
       <div className={styles["container"]}>
         <LoginButton

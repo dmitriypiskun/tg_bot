@@ -32,9 +32,9 @@ export interface GetUserLIstOptions {
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const useUserData = () => {
-  const getUser = async (): Promise<User | null> => {
+  const getUser = async (tgId: number): Promise<User | null> => {
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(`${API_URL}?tgId=${tgId}`);
       return response.json();
     } catch (err) {
       console.log((err as Error).message);
@@ -74,7 +74,7 @@ export const useUserData = () => {
 
   const createUser = async (data: CreateUserData): Promise<User | null> => {
     try {
-      const response = await fetch(`API_URL`, {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           Accept: "application/json",

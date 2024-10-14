@@ -4,7 +4,7 @@ import { UserService } from '../domain/user.service';
 export class FindUserByIdUserCase {
   constructor(private userService: UserService) {}
 
-  async execute(id: string): Promise<User> {
-    return this.userService.findById(id);
+  async execute(tgId: string): Promise<User> {
+    return this.userService.findByTgId(tgId);
   }
 }

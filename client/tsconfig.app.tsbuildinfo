@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts"],"version":"5.6.3"}
+{"root":["./src/main.tsx","./src/usetelegram.tsx","./src/useuser.tsx","./src/vite-env.d.ts","./src/components/index.ts","./src/components/button/button.tsx","./src/components/header/header.tsx","./src/components/label-block/label-block.tsx","./src/pages/admin.tsx","./src/pages/user-detail.tsx"],"version":"5.6.3"}

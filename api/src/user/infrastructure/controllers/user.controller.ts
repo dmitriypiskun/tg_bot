@@ -29,8 +29,8 @@ export class UserController {
   ) {}
 
   @Get()
-  async find(@Query('id') id: string): Promise<UserPresenter> {
-    const user = await this.getUserUsecase.execute(id);
+  async find(@Query('tgId') tgId: string): Promise<UserPresenter> {
+    const user = await this.getUserUsecase.execute(tgId);
     return new UserPresenter(user);
   }
 

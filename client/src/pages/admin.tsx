@@ -1,25 +1,24 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Header } from "../components";
 import { User, useUserData } from "../useUser";
 
 import styles from "./admin.module.css";
-import { useTelegram } from "../useTelegram";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
 import locale from "rc-pagination/lib/locale/en_US";
 import { useDebounce } from "use-debounce";
-import { LoginButton } from "@telegram-auth/react";
+import { LoginButton, TelegramAuthData } from "@telegram-auth/react";
 
 export interface AdminProps {}
 
 export const Admin: React.FC<AdminProps> = () => {
   const [search, setSearch] = useState("");
-  const [limit, setLimit] = useState(1);
+  const [limit] = useState(1);
   const [offset, setOffset] = useState(0);
   const [countPages, setCountPages] = useState(0);
   const [users, setUsers] = useState<User[]>([]);
-  const { tg, user } = useTelegram();
-  const { getUserList } = useUserData();
+  const [isLogin, setIsLogin] = useState(false);
+  const { getUserList, getUser } = useUserData();
 
   const currentPage = useMemo(() => Math.ceil(offset / limit), [offset, limit]);
 
@@ -38,7 +37,12 @@ export const Admin: React.FC<AdminProps> = () => {
     setOffset(page * pageSize);
   };
 
-  if (!user) {
+  const handleLogin = async (data: TelegramAuthData) => {
+    const result = await getUser(data.id);
+    setIsLogin(!!result);
+  };
+
+  if (!isLogin) {
     return (
       <div className={styles["container"]}>
         <LoginButton
@@ -47,7 +51,7 @@ export const Admin: React.FC<AdminProps> = () => {
           cornerRadius={20}
           showAvatar={false}
           lang="en"
-          // onAuthCallback={handleLogin}
+          onAuthCallback={handleLogin}
         />
       </div>
     );

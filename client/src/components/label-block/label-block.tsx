@@ -5,7 +5,7 @@ export interface LabelBlockProps {
   text?: string;
 }
 
-export const LabelBlockProps: React.FC<LabelBlockProps> = ({ label, text }) => {
+export const LabelBlock: React.FC<LabelBlockProps> = ({ label, text }) => {
   return (
     <div className={styles["container"]}>
       <span className={styles["container__label"]}>{label}</span>

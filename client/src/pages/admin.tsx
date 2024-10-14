@@ -46,7 +46,7 @@ export const Admin: React.FC<AdminProps> = () => {
 
   if (!isLogin && !user) {
     return (
-      <div className={styles["container"]}>
+      <div className={styles["container"]} style={{ alignItems: "center" }}>
         <LoginButton
           botUsername={"whols_here_bot"}
           buttonSize="large"
@@ -74,44 +74,46 @@ export const Admin: React.FC<AdminProps> = () => {
           />
         </div>
 
-        <table className={styles["table"]}>
-          <thead>
-            <tr>
-              <th className={styles["head__cell"]}>Avatar</th>
-              <th className={styles["head__cell"]}>Telegram ID</th>
-              <th className={styles["head__cell"]}>First name</th>
-              <th className={styles["head__cell"]}>Second name</th>
-              <th className={styles["head__cell"]}>User name</th>
-              <th className={styles["head__cell"]}>Phone</th>
-              <th className={styles["head__cell"]}>Language</th>
-              <th className={styles["head__cell"]}>Create Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                <td>
-                  {user.photo ? (
-                    <img
-                      className={styles["avatar"]}
-                      src={user.photo}
-                      alt={user.firstName}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </td>
-                <td>{user.tgId}</td>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.userName}</td>
-                <td>{user.phone}</td>
-                <td>{user.language}</td>
-                <td>{user.createdAt.toString()}</td>
+        <div className={styles["table__wrapper"]}>
+          <table className={styles["table"]}>
+            <thead>
+              <tr>
+                <th className={styles["head__cell"]}>Avatar</th>
+                <th className={styles["head__cell"]}>Telegram ID</th>
+                <th className={styles["head__cell"]}>First name</th>
+                <th className={styles["head__cell"]}>Second name</th>
+                <th className={styles["head__cell"]}>User name</th>
+                <th className={styles["head__cell"]}>Phone</th>
+                <th className={styles["head__cell"]}>Language</th>
+                <th className={styles["head__cell"]}>Create Date</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  <td>
+                    {user.photo ? (
+                      <img
+                        className={styles["avatar"]}
+                        src={user.photo}
+                        alt={user.firstName}
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </td>
+                  <td>{user.tgId}</td>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.userName}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.language}</td>
+                  <td>{user.createdAt.toString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <Pagination
           hideOnSinglePage

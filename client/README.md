@@ -16,9 +16,10 @@ $ npm ci
 
 #### Environment variables
 
-| №   | Name         | Description      | Default value |
-| :-- | :----------- | ---------------- | :------------ |
-| 1   | VITE_API_URL | Sets the api url |               |
+| №   | Name          | Description            | Default value |
+| :-- | :------------ | ---------------------- | :------------ |
+| 1   | VITE_API_URL  | Sets the api url       |               |
+| 1   | VITE_BOT_NAME | Sets telegram bot name |               |
 
 3. Run the project with the command:
 

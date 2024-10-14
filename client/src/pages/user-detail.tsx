@@ -44,7 +44,7 @@ export function UserDetail() {
     return (
       <div className={styles["container"]}>
         <LoginButton
-          botUsername={"whols_here_bot"}
+          botUsername={import.meta.env.VITE_BOT_NAME}
           buttonSize="large"
           cornerRadius={20}
           showAvatar={false}

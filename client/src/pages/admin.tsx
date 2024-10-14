@@ -48,7 +48,7 @@ export const Admin: React.FC<AdminProps> = () => {
     return (
       <div className={styles["container"]} style={{ alignItems: "center" }}>
         <LoginButton
-          botUsername={"whols_here_bot"}
+          botUsername={import.meta.env.VITE_BOT_NAME}
           buttonSize="large"
           cornerRadius={20}
           showAvatar={false}

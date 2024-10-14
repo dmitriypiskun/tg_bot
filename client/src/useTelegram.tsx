@@ -7,8 +7,6 @@ export const useTelegram = () => {
     tg.ready();
   }, [tg]);
 
-  console.log("TG: ", tg.initDataUnsafe);
-
   return {
     tg,
     user: tg.initDataUnsafe.user,
